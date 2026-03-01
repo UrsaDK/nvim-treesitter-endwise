@@ -111,6 +111,7 @@ local function endwise(bufnr)
 
     -- Search up the first the closest non-whitespace text before the cursor
     local row, col = unpack(vim.fn.searchpos('\\S', 'nbW'))
+    if row == 0 or col == 0 then return end
     row = row - 1
     col = col - 1
 
@@ -119,7 +120,6 @@ local function endwise(bufnr)
     if not lang then
         return
     end
-
 
     local node = vim.treesitter.get_node({
         bufnr = bufnr,
